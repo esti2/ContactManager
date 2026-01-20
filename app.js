@@ -12,6 +12,10 @@ function handleChoice(choice) {
             return model.deleteContact(choice);
         case "list":
             return model.listContacts();
+        case "help":
+            return ui.help();
+        case "search":
+            return model.search(choice);
         default:
             return "Unknown command";
     }

@@ -15,7 +15,6 @@ function getMenuChice() {
     validCoice = false;
     while (!validCoice) {
         if (input.startsWith("add")) {
-            //if()
             validCoice = true;
             return input;
         }
@@ -25,7 +24,7 @@ function getMenuChice() {
         }
         else if (input.startsWith("search")) {
             validCoice = true;
-            return "search";
+            return input;
         }
         else if (input.startsWith("delete")) {
             validCoice = true;
@@ -40,22 +39,6 @@ function getMenuChice() {
             validCoice = true;
             return "exit";
         }
-        //   switch (input) {
-        //     case value:
-
-        //         break;
-        //          case value:
-
-        //         break;
-        //          case value:
-
-        //         break;
-        //          case help:
-        //         help();
-        //         break;
-
-        //     default:
-        //         break;
     }
 }
 

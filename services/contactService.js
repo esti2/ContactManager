@@ -64,9 +64,8 @@ const addContact = (choice) => {
     if (validation.validateContactAdd(name, email, phone)) {
 
         const newContact = { name, email, phone };
-
         contacts.push(newContact);
-        //contacts.push(choice);
+
 
         fs.writeFileSync(
             FILE_PATH,
@@ -74,7 +73,7 @@ const addContact = (choice) => {
             'utf8'
         );
 
-        console.log("✓ Contact added");
+        console.log("✓ Contacts saved to contacts.json");
         return contacts;
     }
 
@@ -107,7 +106,40 @@ const deleteContact = (choice) => {
     console.log("✓ Contact deleted successfully");
 };
 
+const listContacts = () => {
+    if (fileExist()) {
+        contact = loadContacts();
+        if (contact.length > 0) {
+            console.log("=== All Contacts ===");
+            for (let index = 0; index < contact.length; index++) {
+                console.log(`${index + 1}. -${contacts[index].name} - ${contacts[index].email} -${contacts[index].phone}`);
+            }
+        }
+    }
+}
+
+const search = (choice) => {
+    const parts = choice.split(" ");
+
+    const command = parts[0]; // "search  
+    const name = parts[1];
+    let contactExists = [];
+    if (fileExist()) {
+        contacts = loadContacts();
+        if (contacts.length > 0) {
+            contactExists = contacts.filter(
+                c => c.name.toLowerCase().startsWith(name.toLowerCase())
+            );
+            console.log(`=== Search Results for "${name}" ===`);
+            for (let index = 0; index < contactExists.length; index++) {
+                console.log(`${index + 1}. -${contactExists[index].name} - ${contactExists[index].email} -${contactExists[index].phone}`);
+            }
+        }
+    }
+}
 module.exports = {
     addContact,
-    deleteContact
+    deleteContact,
+    listContacts,
+    search
 };
