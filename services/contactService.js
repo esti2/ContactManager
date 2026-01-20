@@ -1,21 +1,30 @@
 const fs = require("fs");
 const FILE_PATH = "./contacts.json";
-let contacts;
+// let contacts;
 
 const loadContacts = () => {
   console.log("Loading contacts from contacts.json...");
+
+  if (!fs.existsSync(FILE_PATH)) {
+    console.log("✗ File not found - creating new contact list");
+    return []; // מחזירים מערך ריק כדי שהתוכנה תוכל להמשיך לעבוד
+  }
+
   try {
     const data = fs.readFileSync(FILE_PATH, "utf8");
-    contacts = JSON.parse(data);
-    console.log("file is exeists");
+    const contacts = JSON.parse(data);
+    console.log("✓ File exists and loaded successfully");
     return contacts;
   } catch {
-    console.log("file is not exeists");
-    const data = fs.writeFileSync(FILE_PATH, "utf8");
-    console.log("------- : ", data);
-    contacts = JSON.parse(data);
+    // console.log("file is not exeists");
+    // const data = fs.writeFileSync(FILE_PATH, "utf8");
+    // console.log("------- : ", data);
+    // contacts = JSON.parse(data);
 
-    return contacts;
+    // return data;
+
+    console.log("✗ Error: Handled corrupted file");
+    return [];
   }
 };
 
@@ -35,10 +44,10 @@ const addContact = (name, email, phone) => {
       JSON.stringify(contact, null, 2),
       (err) => {
         if (err) {
-          console.log("שגיאה בכתיבת הקובץ");
+          console.log(" error");
           return;
         }
-        console.log("איש הקשר נוסף ונוצר קובץ חדש");
+        console.log("add contact ");
       },
     );
   }
