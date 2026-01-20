@@ -14,29 +14,29 @@ function getMenuChice() {
     const input = prompt("Choose option:")
     validCoice = false;
     while (!validCoice) {
-        if (input === "add") {
+        if (input.startsWith("add")) {
             //if()
             validCoice = true;
-            return "add";
+            return input;
         }
-        else if (input === "list") {
+        else if (input.startsWith("list")) {
             validCoice = true;
             return "list";
         }
-        else if (input === "search") {
+        else if (input.startsWith("search")) {
             validCoice = true;
             return "search";
         }
-        else if (input === "delete") {
+        else if (input.startsWith("delete")) {
             validCoice = true;
-            return "delete";
+            return input;
         }
 
-        else if (input === "help") {
+        else if (input.startsWith("help")) {
             validCoice = true;
             return "help";
         }
-        else if (input === "exit") {
+        else if (input.startsWith("exit")) {
             validCoice = true;
             return "exit";
         }
